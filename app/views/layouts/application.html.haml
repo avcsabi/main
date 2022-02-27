@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title MyYellowBook
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %header
+      %h1= link_to 'My Yellow Book'
+    #content
+      - flash.each do |name, msg|
+        - if msg.present?
+          %div{class: "alert alert-#{name.to_s == 'error' ? 'danger' : 'success'} alert-dismissible", role: 'alert'}
+            %button.close{type: 'button', 'data-dismiss' => 'alert', 'aria-label' => 'Close'}
+              %span{'aria-hidden' => 'true'} &times;
+            - if msg.kind_of?(Array)
+              - msg.each do |item|
+                %h3= raw(item)
+            - else
+              %h3= raw(msg)
+      = yield
+    %footer= "Copyright &copy; #{DateTime.now.year} MyYellowBook.".html_safe

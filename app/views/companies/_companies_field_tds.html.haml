@@ -1,0 +1,7 @@
+%td= c.company_number
+%td= c.company_name
+%td= c.company_status&.titleize
+%td= c.date_of_creation
+%td= c.type&.humanize&.titleize
+%td= c.jurisdiction&.gsub('-', ' / ')&.titleize
+%td= c.address&.to_s

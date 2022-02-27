@@ -1,0 +1,18 @@
+%p
+  These are the companies saved from the search results of Companies House UK.
+  = link_to 'Search for a company in Companies House UK', search_in_companies_house_companies_path
+= will_paginate @companies
+%table
+  %thead
+    %tr
+      = render partial: 'companies/companies_field_ths'
+  %tbody
+    - @companies.each do |c|
+      %tr
+        = render partial: 'companies/companies_field_tds', locals: {c: c}
+        %td
+          = button_to 'Delete', {action: "destroy", id: c.id}, method: :delete, data: { confirm: "Are you sure?" }
+          = button_to 'Update', {action: "update", id: c.id}, method: :patch
+- if @companies.count == 0
+  .alert.alert-info{role: 'alert'}
+    There are currently no companies saved in My Yellow Book

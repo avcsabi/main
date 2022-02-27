@@ -1,0 +1,5 @@
+shared:
+  service_url: https://api.company-information.service.gov.uk
+  api_key: <%= ENV['MY_YELLOW_BOOK_CH_API_KEY'] %>
+  connect_timeout: 10
+  receive_timeout: 30

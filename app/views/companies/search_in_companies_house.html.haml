@@ -1,0 +1,25 @@
+%h2 Search companies using Companies House UK service
+= link_to 'View saved companies in My Yellow Book', companies_path
+= form_tag search_in_companies_house_companies_path, autocomplete: :off, method: :get do
+  .field
+    %label{for: :term} Search term:
+    = text_field_tag :term, params[:term]
+    = submit_tag 'Go'
+
+- if @results
+  %h3<
+    Found #{pluralize(@results[:total_results], 'record')}
+    - if @results[:total_results] > @results[:items_per_page]
+      %span.normal= ", #{@results[:items_per_page]} displayed"
+
+  %table#c-s-results
+    %thead
+      %tr
+        = render partial: 'companies/companies_field_ths'
+    %tbody
+      - @results[:companies].each do |c|
+        %tr
+          = render partial: 'companies/companies_field_tds', locals: {c: c}
+          - c_attrs = c.attributes.select{|_,v| v.present?}
+          - c_attrs[:address_attributes] = c.address.attributes.select{|_,v| v.present?}
+          %td= button_to 'Save', {action: "create", company: c_attrs}, method: :post
