@@ -56,4 +56,6 @@ from the project root:
   rails s
 
 After successful installation if you use a browser on the machine that hosts the application's server then
-you can access the application using address: http://localhost:3001/
+you can access the application using address: http://localhost:3010/
+
+The port in the address must match the port defined by the environment variable MY_YELLOW_BOOK_SRV_PORT
