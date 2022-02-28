@@ -78,6 +78,4 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: my_yellow_book_production
-  #username: my_yellow_book
+  url: <%= ENV['DATABASE_URL'] %>
