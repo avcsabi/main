@@ -50,7 +50,7 @@ class CompaniesController < ApplicationController
       else
         attrs = updated_company_data[:company].attributes.select{|_,v| v.present?}
         attrs[:address_attributes] = updated_company_data[:company].address.attributes.select{|_,v| v.present?}
-        if company.update_attributes(attrs)
+        if company.update(attrs)
           flash[:notice] = "Data for company with number #{company.company_number} updated"
         else
           flash[:error] = "Error updating company information (#{company.errors.full_messages.join('; ')})"
